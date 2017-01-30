@@ -1,10 +1,4 @@
-<!--
-	@license
-	Copyright (c) 2017 Gulliver S.R.L.. All rights reserved.
--->
-
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
 
 <dom-module id="paper-avatar">
 	<template>
@@ -19,7 +13,7 @@
 				border-radius: 50%;
 			}
 			
-			.label, img {
+			#label, #img {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -30,17 +24,22 @@
 				border-radius: 50%;
 			}
 			
-			.label {
+			#label {
 				line-height: 41px;
 				text-align: center;
 				font-size: 24px;
 				font-weight: 400;
 				color: rgba(255, 255, 255, .8);
 				text-transform: capitalize;
+				font-family: "Roboto";
+			}
+			
+			#img.hidden {
+				display: none;
 			}
 		</style>
 
-		<div class="label" title="[[label]]">[[_label(label)]]</div>
+		<div id="label" title="[[label]]">[[_label(label)]]</div>
 		<template is="dom-if" if="[[src]]">
 			<img id="img" src="[[src]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
 		</template>
@@ -52,14 +51,25 @@
 			is : 'paper-avatar',
 
 			properties: {
+				/*
+				 * Image address or base64
+				 */
 				src: {
 					type: String,
 					observer: '_observerSrc'
 				},
+
+				/*
+				 *	Label with username
+				 */
 				label: {
 					type: String,
 					observer: '_observerLabel'
 				},
+
+				/*
+				 * Avatar background color
+				 */
 				color: {
 					type: String,
 					observer: '_observerColor'
@@ -67,18 +77,17 @@
 			},
 			
 			_observerSrc: function(src){
-// 				console.log(src);
+				console.log(src);
 			},
 			
 			_observerLabel: function(label){
-				this.style.backgroundColor = this.getColor();
+				if(this.label && !this.color)
+					this.style.backgroundColor = this._parseColor();
 			},
 			
 			_observerColor: function(color){
-				if(!color)
-					color = this.getColor();
-
-				this.style.backgroundColor = color;
+				if(color)
+					this.style.backgroundColor = color;
 			},
 			
 			_label: function(label){
@@ -92,26 +101,21 @@
 				e.currentTarget.classList.remove('hidden');
 			},
 			
-			_onImgError: function(){
+			_onImgError: function(e){
 				e.currentTarget.classList.add('hidden');
 			},
-			
-			getColor: function(){
-				var COLORS = ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#795548", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#9E9E9E", "#607D8B"];
-				var hash = Math.random();
 
-				if(this.label)
-				    for(var a = 0; a < this.label.length; a++)
-				    	hash = ((hash << 5) + hash) + this.label.charCodeAt(a); 
+			_parseColor: function(){
+				var COLORS = ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#795548", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#9E9E9E", "#607D8B"];				
+				var hash = 0;
+
+				for(var a = 0; a < this.label.length; a++)
+					hash += (this.label.charCodeAt(a) << 5); 
 
 				if(hash >= COLORS.length)
 					return COLORS[hash % COLORS.length];
 
 				return COLORS[hash];
-			},
-			
-			ready: function(){
-				this.style.backgroundColor = this.getColor();
 			}
 		});
 	</script>
