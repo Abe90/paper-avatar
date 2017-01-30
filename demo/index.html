@@ -1,53 +1,58 @@
 <!doctype html>
 <html>
-  <head>
-    <title>paper-avatar demo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+	<head>
+		<title>paper-avatar demo</title>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-    <link rel="import" href="../paper-avatar.html">
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
-  </head>
-  <body>
+		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<link rel="import" href="../paper-avatar.html">
 
-    <div class="vertical-section-container centered">
-      <h3>Label Demo</h3>
-      <demo-snippet>
-        <template>
-          <paper-avatar label="Avatar"></paper-avatar>
-		  <paper-avatar label="Avatar 2"></paper-avatar>
-		  <paper-avatar label="Avatar 3"></paper-avatar>
-		  <paper-avatar label="Avatar 4"></paper-avatar>
-        </template>
-      </demo-snippet>
-    </div>
-	
-	<div class="vertical-section-container centered">
-      <h3>Colors Demo</h3>
-      <demo-snippet>
-        <template>
-          <paper-avatar label="Avatar" color="red"></paper-avatar>
-		  <paper-avatar label="Avatar 2" color="#03A9F4"></paper-avatar>
-		  <paper-avatar label="Avatar 3" color="#4CAF50"></paper-avatar>
-		  <paper-avatar label="Avatar 4" color="#FFC107"></paper-avatar>
-        </template>
-      </demo-snippet>
-    </div>
-	
-	<div class="vertical-section-container centered">
-      <h3>Image Demo</h3>
-      <demo-snippet>
-        <template>
-          <paper-avatar src="https://avatars3.githubusercontent.com/u/4205629"></paper-avatar>
-        </template>
-      </demo-snippet>
-    </div>
+		<style is="custom-style" include="demo-pages-shared-styles">
+			.vertical-section-container {
+				max-width: 500px;
+			}
+		</style>
+	</head>
+	<body>
 
-  </body>
+		<div class="vertical-section-container centered">
+			<h3>Label Demo</h3>
+			<demo-snippet>
+				<template>
+					<paper-avatar label="Daniel" two-chars></paper-avatar>
+					<paper-avatar label="Barbara" two-chars></paper-avatar>
+					<paper-avatar label="Michael"></paper-avatar>
+					<paper-avatar label="Charles"></paper-avatar>
+				</template>
+			</demo-snippet>
+		</div>
+
+		<div class="vertical-section-container centered">
+			<h3>Colors Demo</h3>
+			<demo-snippet>
+				<template>
+					<paper-avatar label="James" color="red"></paper-avatar>
+					<paper-avatar label="William" color="green"></paper-avatar>
+					<paper-avatar label="Robert" color="#5070e4"></paper-avatar>
+					<paper-avatar label="Karen" color="#FFC107"></paper-avatar>
+				</template>
+			</demo-snippet>
+		</div>
+
+		<div class="vertical-section-container centered">
+			<h3>Image Demo</h3>
+			<demo-snippet>
+				<template>
+					<paper-avatar src="https://avatars3.githubusercontent.com/u/4205629"></paper-avatar>
+					<paper-avatar label="Abe90" src="http://img.not.found"></paper-avatar>
+				</template>
+			</demo-snippet>
+		</div>
+
+	</body>
 </html>
