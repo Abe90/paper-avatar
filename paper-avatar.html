@@ -107,10 +107,19 @@ User avatar in material style
 			},
 			
 			_label: function(label){
-				if(label)
-					return label.substring(0, this.twoChars ? 2 : 1);
+				if(!label)
+					return "";
 
-				return "";
+				if(this.twoChars){
+					if(this.label.indexOf(" ") > -1){
+						var matches = this.label.match(/\b(\w)/g);
+						return matches[0] + matches[1];
+					} else {
+						return label.substring(0, 2);
+					}
+				}
+
+				return label.charAt(0);
 			},
 			
 			_onImgLoad: function(e){
