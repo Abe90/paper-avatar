@@ -1,14 +1,14 @@
-<link rel="import" href="../polymer/polymer.html">
-
 <!--
-`paper-avatar`
-User avatar in material style
-
-@demo demo/index.html 
+	@license
+	Copyright (c) 2017 Gulliver S.R.L.. All rights reserved.
 -->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
 
 <dom-module id="paper-avatar">
 	<template>
+
 		<style>
 			:host {
 				display: inline-block;
@@ -18,7 +18,7 @@ User avatar in material style
 				height: 40px;
 				border-radius: 50%;
 			}
-
+			
 			.label, img {
 				position: absolute;
 				top: 0;
@@ -29,7 +29,7 @@ User avatar in material style
 				height: 100%;
 				border-radius: 50%;
 			}
-
+			
 			.label {
 				line-height: 41px;
 				text-align: center;
@@ -39,10 +39,12 @@ User avatar in material style
 				text-transform: capitalize;
 			}
 		</style>
+
 		<div class="label" title="[[label]]">[[_label(label)]]</div>
 		<template is="dom-if" if="[[src]]">
 			<img id="img" src="[[src]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
 		</template>
+
 	</template>
 
 	<script>
@@ -55,7 +57,8 @@ User avatar in material style
 					observer: '_observerSrc'
 				},
 				label: {
-					type: String
+					type: String,
+					observer: '_observerLabel'
 				},
 				color: {
 					type: String,
@@ -65,6 +68,10 @@ User avatar in material style
 			
 			_observerSrc: function(src){
 // 				console.log(src);
+			},
+			
+			_observerLabel: function(label){
+				this.style.backgroundColor = this.getColor();
 			},
 			
 			_observerColor: function(color){
@@ -91,10 +98,11 @@ User avatar in material style
 			
 			getColor: function(){
 				var COLORS = ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#795548", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#9E9E9E", "#607D8B"];
-				var hash = 0;
+				var hash = Math.random();
 
-			    for(var a = 0; a < this.label.length; a++)
-			    	hash = ((hash << 5) + hash) + this.label.charCodeAt(a); 
+				if(this.label)
+				    for(var a = 0; a < this.label.length; a++)
+				    	hash = ((hash << 5) + hash) + this.label.charCodeAt(a); 
 
 				if(hash >= COLORS.length)
 					return COLORS[hash % COLORS.length];
