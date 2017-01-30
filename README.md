@@ -10,15 +10,14 @@ User avatar in material style
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="my-element.html">
-    <link rel="import" href="../other-element/other-element.html">
+    <link rel="import" href="paper-avatar.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
 ```
 -->
 ```html
-<paper-avatar src="https://avatars.githubusercontent.com/u/4205629?v=3&s=40" label="abe90"></paper-avatar>
+<paper-avatar label="Abe90" src="https://avatars.githubusercontent.com/u/4205629"></paper-avatar>
 ```
 
 ## Install
