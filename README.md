@@ -4,6 +4,23 @@
 
 User avatar in material style
 
+## Example
+
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="my-element.html">
+    <link rel="import" href="../other-element/other-element.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<paper-avatar src="https://avatars.githubusercontent.com/u/4205629?v=3&s=40" label="abe90"></paper-avatar>
+```
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
