@@ -2,6 +2,7 @@
   "name": "paper-avatar",
   "description": "User avatar in material style",
   "main": "paper-avatar.html",
+  "license": "Apache-2.0",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0"
   },

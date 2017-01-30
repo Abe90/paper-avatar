@@ -1,3 +1,5 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://github.com/Abe90/paper-avatar)
+
 # \<paper-avatar\>
 
 User avatar in material style
