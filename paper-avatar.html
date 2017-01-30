@@ -17,7 +17,11 @@ User avatar in material style
 				width: 40px;
 				height: 40px;
 				border-radius: 50%;
-				user-select: none;
+				cursor: default;
+				-webkit-user-select: none;
+				   -moz-user-select: none;
+				    -ms-user-select: none;
+						user-select: none; 
 			}
 			
 			#label, #img {
@@ -32,7 +36,7 @@ User avatar in material style
 			}
 			
 			#label {
-				line-height: 41px;
+				line-height: 40px;
 				text-align: center;
 				font-size: 24px;
 				font-weight: 400;
@@ -40,6 +44,7 @@ User avatar in material style
 				text-transform: capitalize;
 				font-family: 'Roboto', 'Noto', sans-serif;
 				overflow: hidden;
+				background-color: gray;
 			}
 			
 			#img.hidden {
@@ -49,7 +54,7 @@ User avatar in material style
 
 		<div id="label" title="[[label]]">[[_label(label)]]</div>
 		<template is="dom-if" if="[[src]]">
-			<img id="img" src="[[src]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
+			<img id="img" src="[[src]]" title="[[label]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
 		</template>
 
 	</template>
@@ -63,8 +68,7 @@ User avatar in material style
 				 * Image address or base64
 				 */
 				src: {
-					type: String,
-					observer: '_observerSrc'
+					type: String
 				},
 
 				/*
@@ -83,24 +87,23 @@ User avatar in material style
 					observer: '_observerColor'
 				},
 
+				/*
+				 * Show two chars in avatar
+				 */
 				twoChars: {
 					type: Boolean,
 					value: false
 				}
 			},
 			
-			_observerSrc: function(src){
-				console.log(src);
-			},
-			
 			_observerLabel: function(label){
 				if(this.label && !this.color)
-					this.style.backgroundColor = this._parseColor();
+					this.$.label.style.backgroundColor = this._parseColor();
 			},
 			
 			_observerColor: function(color){
 				if(color)
-					this.style.backgroundColor = color;
+					this.$.label.style.backgroundColor = color;
 			},
 			
 			_label: function(label){

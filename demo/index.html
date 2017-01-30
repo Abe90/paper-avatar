@@ -10,12 +10,20 @@
 
 		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		
+		<link rel="import" href="../../paper-item/paper-icon-item.html">
+		<link rel="import" href="../../paper-item/paper-item-body.html">
+		
 		<link rel="import" href="../paper-avatar.html">
 
 		<style is="custom-style" include="demo-pages-shared-styles">
 			.vertical-section-container {
 				max-width: 500px;
 			}
+			
+			div[role="listbox"] {
+				border: 1px solid #e5e5e5;
+			}			
 		</style>
 	</head>
 	<body>
@@ -39,17 +47,56 @@
 					<paper-avatar label="James" color="red"></paper-avatar>
 					<paper-avatar label="William" color="green"></paper-avatar>
 					<paper-avatar label="Robert" color="#5070e4"></paper-avatar>
-					<paper-avatar label="Karen" color="#FFC107"></paper-avatar>
+					<paper-avatar label="Karen" color="rgb(255, 193, 7)"></paper-avatar>
 				</template>
 			</demo-snippet>
 		</div>
 
 		<div class="vertical-section-container centered">
-			<h3>Image Demo</h3>
+			<h3>Image Demo & Image not found Demo</h3>
 			<demo-snippet>
 				<template>
-					<paper-avatar src="https://avatars3.githubusercontent.com/u/4205629"></paper-avatar>
+					<paper-avatar src="https://avatars.githubusercontent.com/u/4205629"></paper-avatar>
 					<paper-avatar label="Abe90" src="http://img.not.found"></paper-avatar>
+				</template>
+			</demo-snippet>
+		</div>
+		
+		<div class="vertical-section-container centered">
+			<h3>List Demo</h3>
+			<demo-snippet>
+				<template>
+					<div role="listbox">
+						<paper-icon-item>
+							<paper-avatar label="Michael" item-icon></paper-avatar>
+							Michael
+						</paper-icon-item>
+						<paper-icon-item>
+							<paper-avatar label="Karen Wilson" item-icon></paper-avatar>
+							Karen Wilson
+						</paper-icon-item>
+						<paper-icon-item>
+							<paper-avatar label="Robert Smith" item-icon></paper-avatar>
+							<paper-item-body two-line>
+								<div>Robert Smith</div>
+								<div secondary>robert.smith@example.com</div>
+							</paper-item-body>
+						</paper-icon-item>
+						<paper-icon-item>
+							<paper-avatar label="Barbara Murphy" item-icon></paper-avatar>
+							<paper-item-body two-line>
+								<div>Barbara Murphy</div>
+								<div secondary>barbara.murphy@example.com</div>
+							</paper-item-body>
+						</paper-icon-item>
+						<paper-icon-item>
+							<paper-avatar label="William Brown" item-icon></paper-avatar>
+							<paper-item-body two-line>
+								<div>William Brown</div>
+								<div secondary>william.brown@example.com</div>
+							</paper-item-body>
+						</paper-icon-item>
+					</div>
 				</template>
 			</demo-snippet>
 		</div>
