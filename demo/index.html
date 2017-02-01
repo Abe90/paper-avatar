@@ -37,8 +37,18 @@
 			<demo-snippet>
 				<template>
 					<paper-avatar label="Robert"></paper-avatar>
-					<paper-avatar label="Charles"></paper-avatar>
-					<paper-avatar label="Barbara" two-chars></paper-avatar>
+					<paper-avatar label="Barbara Smith"></paper-avatar>
+					<paper-avatar label="Daniel Johnson"></paper-avatar>
+				</template>
+			</demo-snippet>
+		</div>
+		
+		<div class="vertical-section-container centered">
+			<h3>Two chars Demo</h3>
+			<demo-snippet>
+				<template>
+					<paper-avatar label="Robert" two-chars></paper-avatar>
+					<paper-avatar label="Barbara Smith" two-chars></paper-avatar>
 					<paper-avatar label="Daniel Johnson" two-chars></paper-avatar>
 				</template>
 			</demo-snippet>
@@ -48,10 +58,52 @@
 			<h3>Colors Demo</h3>
 			<demo-snippet>
 				<template>
-					<paper-avatar label="James" color="red"></paper-avatar>
-					<paper-avatar label="William" color="green"></paper-avatar>
-					<paper-avatar label="Robert" color="#5070e4" two-chars></paper-avatar>
-					<paper-avatar label="Karen Wilson" color="rgb(255, 193, 7)" two-chars></paper-avatar>
+					<style is="custom-style">
+						paper-avatar.red {
+							--paper-avatar-color: red;
+						}
+						paper-avatar.blue {
+							--paper-avatar-color: #5070e4;
+						}
+						paper-avatar.yellow {
+							--paper-avatar-color: rgb(255, 193, 7);
+						}
+					</style>
+
+					<paper-avatar label="James" class="red"></paper-avatar>
+					<paper-avatar label="Robert" class="blue"></paper-avatar>
+					<paper-avatar label="Karen Wilson" class="yellow"></paper-avatar>
+				</template>
+			</demo-snippet>
+		</div>
+		
+		<div class="vertical-section-container centered">
+			<h3>Size Demo</h3>
+			<demo-snippet>
+				<template>
+					<style is="custom-style">
+						paper-avatar.x-small {
+							--paper-avatar-width: 20px;
+						}
+						paper-avatar.small {
+							--paper-avatar-width: 30px;
+						}
+						paper-avatar.default {
+							--paper-avatar-width: 40px;
+						}
+						paper-avatar.large {
+							--paper-avatar-width: 50px;
+						}
+						paper-avatar.x-large {
+							--paper-avatar-width: 60px;
+						}
+					</style>
+
+					<paper-avatar label="Michael" class="x-small"></paper-avatar>
+					<paper-avatar label="Charles" class="small"></paper-avatar>
+					<paper-avatar label="Robert" class="default"></paper-avatar>
+					<paper-avatar label="Karen Wilson" class="large"></paper-avatar>
+					<paper-avatar label="William Brown" class="x-large"></paper-avatar>
 				</template>
 			</demo-snippet>
 		</div>

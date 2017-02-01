@@ -4,6 +4,26 @@
 `paper-avatar`
 User avatar in material style
 
+### Styling
+
+To change the background color:
+
+    paper-avatar {
+      --paper-avatar-color: red;
+    }
+	
+To change the size of the avatar:
+
+    paper-avatar {
+      --paper-avatar-width: 60px;
+    }
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-avatar-width` | Size (width and height) of the avatar image | `40px`
+`--paper-avatar-color` | Background color of the avatar image | 
+
+
 @demo demo/index.html 
 -->
 
@@ -11,17 +31,25 @@ User avatar in material style
 	<template>
 		<style>
 			:host {
+				--paper-avatar-width: 40px;
+			}
+
+			:host {
 				display: inline-block;
 				box-sizing: border-box;
 				position: relative;
-				width: 40px;
-				height: 40px;
+				width: var(--paper-avatar-width, 40px);
+				height:  var(--paper-avatar-width, 40px);
 				border-radius: 50%;
 				cursor: default;
 				-webkit-user-select: none;
 				   -moz-user-select: none;
 				    -ms-user-select: none;
-						user-select: none; 
+						user-select: none;
+			}
+			
+			:host > * {
+				pointer-events: none;
 			}
 			
 			#label, #img {
@@ -34,25 +62,39 @@ User avatar in material style
 				height: 100%;
 				border-radius: 50%;
 			}
-			
+
 			#label {
-				line-height: 40px;
-				text-align: center;
-				font-size: 24px;
+				overflow: hidden;
+				background-color: var(--paper-avatar-color, --paper-avatar-bgcolor);
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex-direction: row;
+					-ms-flex-direction: row;
+						flex-direction: row;
+				-webkit-align-items: center;
+					 -ms-flex-align: center;
+					 	align-items: center;
+			}
+
+			#label span {
+				display: block;
+				width: 100%;
 				font-weight: 400;
 				color: rgba(255, 255, 255, .8);
 				text-transform: capitalize;
 				font-family: 'Roboto', 'Noto', sans-serif;
-				overflow: hidden;
-				background-color: gray;
+				-webkit-font-smoothing: antialiased;
+				text-align: center;
+				font-size: calc(var(--paper-avatar-width, 40px) / 1.65);
 			}
 			
-			#img.hidden {
-				display: none;
+			#img[hidden] {
+				display: none !important;
 			}
 		</style>
 
-		<div id="label" title="[[label]]">[[_label(label)]]</div>
+		<div id="label" title="[[label]]"><span>[[_label(label)]]</span></div>
 		<template is="dom-if" if="[[src]]">
 			<img id="img" src="[[src]]" title="[[label]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
 		</template>
@@ -64,14 +106,14 @@ User avatar in material style
 			is : 'paper-avatar',
 
 			properties: {
-				/*
+				/**
 				 * Image address or base64
 				 */
 				src: {
 					type: String
 				},
 
-				/*
+				/**
 				 *	Label with username
 				 */
 				label: {
@@ -79,31 +121,27 @@ User avatar in material style
 					observer: '_observerLabel'
 				},
 
-				/*
-				 * Avatar background color
-				 */
-				color: {
-					type: String,
-					observer: '_observerColor'
-				},
-
-				/*
+				/**
 				 * Show two chars in avatar
 				 */
 				twoChars: {
 					type: Boolean,
 					value: false
+				},
+				
+				/**
+				 * Array of colors for avatar background
+				 */
+				colors: {
+					type: Array,
 				}
 			},
 			
 			_observerLabel: function(label){
-				if(this.label && !this.color)
-					this.$.label.style.backgroundColor = this._parseColor();
-			},
-			
-			_observerColor: function(color){
-				if(color)
-					this.$.label.style.backgroundColor = color;
+				if(this.label){
+					this.customStyle['--paper-avatar-bgcolor'] = this._parseColor();
+					this.updateStyles();
+				}
 			},
 			
 			_label: function(label){
@@ -121,26 +159,27 @@ User avatar in material style
 
 				return label.charAt(0);
 			},
-			
+
 			_onImgLoad: function(e){
-				e.currentTarget.classList.remove('hidden');
+				e.currentTarget.hidden = false;
 			},
-			
+
 			_onImgError: function(e){
-				e.currentTarget.classList.add('hidden');
+				e.currentTarget.hidden = true;
 			},
 
 			_parseColor: function(){
-				var COLORS = ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#795548", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#9E9E9E", "#607D8B"];				
+				var colors = this.colors ? this.colors : ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#795548", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#9E9E9E", "#607D8B"];
+				
 				var hash = 0;
 
 				for(var a = 0; a < this.label.length; a++)
 					hash += (this.label.charCodeAt(a) << 5); 
 
-				if(hash >= COLORS.length)
-					return COLORS[hash % COLORS.length];
+				if(hash >= colors.length)
+					return colors[hash % colors.length];
 
-				return COLORS[hash];
+				return colors[hash];
 			}
 		});
 	</script>
