@@ -1,5 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 
+<script src="lib/jdenticon-1.4.0.min.js"></script>
+<script src="lib/md5.min.js"></script>
+
 <!--
 `paper-avatar`
 User avatar in material style
@@ -38,10 +41,11 @@ Custom property | Description | Default
 				display: inline-block;
 				box-sizing: border-box;
 				position: relative;
-				width: var(--paper-avatar-width, 40px);
-				height:  var(--paper-avatar-width, 40px);
+				width: var(--paper-avatar-width);
+				height:  var(--paper-avatar-width);
 				border-radius: 50%;
 				cursor: default;
+				background-color: var(--paper-avatar-color, --paper-avatar-bgcolor);
 				-webkit-user-select: none;
 				   -moz-user-select: none;
 				    -ms-user-select: none;
@@ -52,7 +56,7 @@ Custom property | Description | Default
 				pointer-events: none;
 			}
 			
-			#label, #img {
+			#label, #img, #jdenticon {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -65,7 +69,6 @@ Custom property | Description | Default
 
 			#label {
 				overflow: hidden;
-				background-color: var(--paper-avatar-color, --paper-avatar-bgcolor);
 				display: -ms-flexbox;
 				display: -webkit-flex;
 				display: flex;
@@ -86,19 +89,28 @@ Custom property | Description | Default
 				font-family: 'Roboto', 'Noto', sans-serif;
 				-webkit-font-smoothing: antialiased;
 				text-align: center;
-				font-size: calc(var(--paper-avatar-width, 40px) / 1.65);
+				font-size: calc(var(--paper-avatar-width) / 1.65);
+			}
+
+			#jdenticon {
+				width: var(--paper-avatar-width);
+				height: var(--paper-avatar-width);
 			}
 			
-			#img[hidden] {
+			*[hidden] {
 				display: none !important;
 			}
 		</style>
 
 		<div id="label" title="[[label]]"><span>[[_label(label)]]</span></div>
+
+		<svg id="jdenticon" width="40" height="40"><content></content></svg>
+
 		<template is="dom-if" if="[[src]]">
 			<img id="img" src="[[src]]" title="[[label]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
 		</template>
-
+		
+		
 	</template>
 
 	<script>
@@ -134,12 +146,34 @@ Custom property | Description | Default
 				 */
 				colors: {
 					type: Array,
+				},
+				
+				/**
+				 * Set true if you want use a jdenticon avatar
+				 */
+				jdenticon: {
+					type: Boolean,
+					value: false
 				}
 			},
 			
 			_observerLabel: function(label){
-				if(this.label){
-					this.customStyle['--paper-avatar-bgcolor'] = this._parseColor();
+				if(label){
+					if(this.jdenticon){
+						this.$.label.hidden = true;
+
+						jdenticon.config = {
+							lightness: {
+								color: [0.6, 0.7],
+								grayscale: [1, 1]
+							},
+							saturation: 1
+						};
+
+						jdenticon.update(this.$.jdenticon, md5(label));
+					}
+
+					this.customStyle['--paper-avatar-bgcolor'] = this._parseColor(label);
 					this.updateStyles();
 				}
 			},
@@ -168,13 +202,13 @@ Custom property | Description | Default
 				e.currentTarget.hidden = true;
 			},
 
-			_parseColor: function(){
+			_parseColor: function(label){
 				var colors = this.colors ? this.colors : ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#795548", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#9E9E9E", "#607D8B"];
 				
 				var hash = 0;
 
-				for(var a = 0; a < this.label.length; a++)
-					hash += (this.label.charCodeAt(a) << 5); 
+				for(var a = 0; a < label.length; a++)
+					hash += (label.charCodeAt(a) << 5); 
 
 				if(hash >= colors.length)
 					return colors[hash % colors.length];
@@ -183,4 +217,5 @@ Custom property | Description | Default
 			}
 		});
 	</script>
+
 </dom-module>
