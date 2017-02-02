@@ -30,10 +30,11 @@ User avatar in material style
 <paper-avatar label="Abe90" two-chars></paper-avatar>
 <paper-avatar label="Abe90" class="red"></paper-avatar>
 <paper-avatar label="Abe90" class="large"></paper-avatar>
+<paper-avatar label="Abe90" jdenticon></paper-avatar>
 ```
 
 ## Install
 
 ```
-$ bower i Abe90/paper-avatar --save
+bower i Abe90/paper-avatar --save
 ```
