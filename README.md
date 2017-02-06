@@ -2,7 +2,7 @@
 
 # \<paper-avatar\>
 
-User avatar in material style
+This component is made for generate a different random avatar for every member.
 
 ## Example
 
