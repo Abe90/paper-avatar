@@ -33,6 +33,29 @@ User avatar in material style
 <paper-avatar label="Abe90" jdenticon></paper-avatar>
 ```
 
+## Two chars
+The `two-chars` parameter is used to show two chars in the generated avatar.
+
+If the `label` is composed of a single word, you'll see the first two letters of that word; the first letter will always appear capitalized.
+
+If instead the `label` is composed of two words, will be displayed the first letter of every word.
+
+### Example
+- first: F
+- First: F
+- First Second: Fs
+- First Second: FS
+
+
+
+## Customization
+There is the opportunity to change some parameters to customize the generated avatar.
+
+The css parameters `--paper-avatar-color` and `--paper-avatar-width` correspond to the background color and the size (width and height) of the avatar.
+
+The `colors` parameter is an array that contains the colors used for the background.
+
+
 ## Install
 
 ```
