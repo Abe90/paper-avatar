@@ -53,7 +53,7 @@ If instead the `label` is composed of two words, will be displayed the first let
 ### Example
 - first: Fi
 - First: Fi
-- First Second: Fs
+- first second: Fs
 - First Second: FS
 
 
@@ -78,5 +78,5 @@ More information at [jdenticon.com](https://www.jdenticon.com/)
 ## Install
 
 ```
-bower i Abe90/paper-avatar --save
+bower install --save Abe90/paper-avatar
 ```
