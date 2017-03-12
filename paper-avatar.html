@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 
 <script src="lib/jdenticon-1.4.0.min.js"></script>
 <script src="lib/md5.min.js"></script>
@@ -45,7 +45,7 @@ Custom property | Description | Default
 				height:  var(--paper-avatar-width);
 				border-radius: 50%;
 				cursor: default;
-				background-color: var(--paper-avatar-color, --paper-avatar-bgcolor);
+				background-color: var(--paper-avatar-color, var(--paper-avatar-bgcolor));
 				-webkit-user-select: none;
 				   -moz-user-select: none;
 				    -ms-user-select: none;
@@ -109,13 +109,11 @@ Custom property | Description | Default
 		<template is="dom-if" if="[[src]]">
 			<img id="img" src="[[src]]" title="[[label]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
 		</template>
-		
-		
 	</template>
 
 	<script>
 		Polymer({
-			is : 'paper-avatar',
+			is: 'paper-avatar',
 
 			properties: {
 				/**
@@ -173,8 +171,9 @@ Custom property | Description | Default
 						jdenticon.update(this.$.jdenticon, md5(label));
 					}
 
-					this.customStyle['--paper-avatar-bgcolor'] = this._parseColor(label);
-					this.updateStyles();
+					this.updateStyles({
+					  '--paper-avatar-bgcolor': this._parseColor(label)
+					});
 				}
 			},
 			
