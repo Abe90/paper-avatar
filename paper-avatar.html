@@ -104,7 +104,7 @@ Custom property | Description | Default
 
 		<div id="label" title="[[label]]"><span>[[_label(label)]]</span></div>
 
-		<svg id="jdenticon" width="40" height="40"><content></content></svg>
+		<svg id="jdenticon" width="40" height="40"><slot></slot></svg>
 
 		<template is="dom-if" if="[[src]]">
 			<img id="img" src="[[src]]" title="[[label]]" on-load="_onImgLoad" on-error="_onImgError" title="[[color]]">
